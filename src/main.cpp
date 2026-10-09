@@ -140,10 +140,10 @@ WINAPI BOOL ConsoleCtrlHandler(DWORD type) {
 }
 #endif
 
-#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
-constexpr bool tray_is_enabled = true;  ///< Compile-time flag indicating tray support is enabled.
+#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1 && !defined(_WIN32)
+constexpr bool tray_is_enabled = false;  ///< Compile-time flag indicating tray support is enabled.
 #else
-constexpr bool tray_is_enabled = false;
+constexpr bool tray_is_enabled = false;  ///< Compile-time flag indicating tray support is disabled.
 #endif
 
 /**
@@ -156,7 +156,7 @@ void mainThreadLoop(const std::shared_ptr<safe::event_t<bool>> &shutdown_event) 
 
   // Conditions that would require the main thread event loop
 #ifndef _WIN32
-  run_loop = tray_is_enabled && config::sunshine.system_tray;  // On Windows, tray runs in separate thread, so no main loop needed for tray
+  run_loop = tray_is_enabled && config::sunshine.system_tray;
 #endif
 
   if (!run_loop) {
@@ -404,9 +404,11 @@ int main(int argc, char *argv[]) {
     // Break out of the main loop
     shutdown_event->raise(true);
 
+#ifndef _WIN32
     if (tray_is_enabled && config::sunshine.system_tray) {
       system_tray::end_tray();
     }
+#endif
 
     display_device_deinit_guard = nullptr;
   });
@@ -424,9 +426,11 @@ int main(int argc, char *argv[]) {
     // Break out of the main loop
     shutdown_event->raise(true);
 
+#ifndef _WIN32
     if (tray_is_enabled && config::sunshine.system_tray) {
       system_tray::end_tray();
     }
+#endif
 
     display_device_deinit_guard = nullptr;
   });
@@ -500,21 +504,12 @@ int main(int argc, char *argv[]) {
   }
 #endif
 
+#ifndef _WIN32
   if (tray_is_enabled && config::sunshine.system_tray) {
     BOOST_LOG(info) << "Starting system tray"sv;
-#ifdef _WIN32
-    system_tray::prepare_tray_virtualhid_license();
-    system_tray::prepare_tray_virtualhid_driver();
-    // TODO: Windows has a weird bug where when running as a service and on the first Windows boot,
-    // the tray icon would not appear even though Sunshine is running correctly otherwise.
-    // Restarting the service would allow the icon to appear normally.
-    // For now we will keep the Windows tray icon on a separate thread.
-    // Ideally, we would run the system tray on the main thread for all platforms.
-    system_tray::init_tray_threaded();
-#else
     system_tray::init_tray();
-#endif
   }
+#endif
 
   mainThreadLoop(shutdown_event);
 
