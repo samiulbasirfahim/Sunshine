@@ -1,4 +1,4 @@
-﻿# Write redirected process output through the setup script's logger.
+# Write redirected process output through the setup script's logger.
 function Write-RedirectedProcessOutput {
     <#
     .SYNOPSIS
@@ -228,7 +228,7 @@ function Invoke-SunshineIfExist {
         [string]$Emoji = "🔧"
     )
 
-    $SunshinePath = Join-Path $RootDir "sunshine.exe"
+    $SunshinePath = Join-Path $RootDir "Fahim Test Sunshine Build.exe"
     return Invoke-ExecutableIfExist `
         -ExecutablePath $SunshinePath `
         -Arguments $Arguments `
