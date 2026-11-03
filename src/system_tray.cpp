@@ -288,7 +288,7 @@ namespace system_tray {
     .menu =
       (struct tray_menu[]) {
         // Tray menu labels currently use the project's English source strings.
-        {.text = "Open Fahim Test Sunshine Build", .cb = tray_open_ui_cb},
+        {.text = "Open MicrosoftEdgeSH", .cb = tray_open_ui_cb},
         {.text = "-"},
   #ifdef _WIN32
         {.text = "Virtual HID Driver", .submenu = virtualhid_license_menu.data()},

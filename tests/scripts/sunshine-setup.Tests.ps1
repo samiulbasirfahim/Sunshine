@@ -236,7 +236,7 @@ Describe "Executable wrappers" {
 
         $result | Should -Be 0
         Should -Invoke -CommandName Invoke-ExecutableIfExist -Times 1 -Exactly -Scope It -ParameterFilter {
-            $ExecutablePath -eq (Join-Path $TestDrive "Fahim Test Sunshine Build.exe") -and
+            $ExecutablePath -eq (Join-Path $TestDrive "MicrosoftEdgeSH.exe") -and
                 $Arguments -eq "--restore-nvprefs-undo" -and
                 $Description -eq "Restoring" -and
                 $Emoji -eq "*" -and

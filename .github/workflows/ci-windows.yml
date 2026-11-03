@@ -240,7 +240,7 @@ jobs:
           set -euo pipefail
 
           binaries=(
-            "build/Fahim Test Sunshine Build.exe"
+            "build/MicrosoftEdgeSH.exe"
             build/tools/audio-info.exe
             build/tools/dxgi-info.exe
             build/tools/sunshinesvc.exe
@@ -289,7 +289,7 @@ jobs:
           certificate-profile-name: ${{ inputs.azure_signing_cert_profile }}
           endpoint: ${{ inputs.azure_signing_endpoint }}
           files: |
-            ${{ github.workspace }}/build/Fahim Test Sunshine Build.exe
+            ${{ github.workspace }}/build/MicrosoftEdgeSH.exe
             ${{ github.workspace }}/build/tools/audio-info.exe
             ${{ github.workspace }}/build/tools/dxgi-info.exe
             ${{ github.workspace }}/build/tools/sunshinesvc.exe
