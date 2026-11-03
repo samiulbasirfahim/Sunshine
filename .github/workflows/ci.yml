@@ -38,6 +38,7 @@ jobs:
 
       - name: Release Setup
         id: release-setup
+        continue-on-error: true
         uses: LizardByte/actions/actions/release_setup@39c468549cfb87ccb917e5e5342e18abc926dc48  # v2026.909.30231
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

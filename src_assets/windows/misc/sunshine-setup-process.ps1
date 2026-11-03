@@ -1,4 +1,4 @@
-# Write redirected process output through the setup script's logger.
+﻿# Write redirected process output through the setup script's logger.
 function Write-RedirectedProcessOutput {
     <#
     .SYNOPSIS

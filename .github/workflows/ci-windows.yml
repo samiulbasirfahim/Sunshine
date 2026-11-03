@@ -3,6 +3,10 @@ name: CI-Windows
 permissions: {}
 
 on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
   workflow_call:
     inputs:
       # Azure Artifact Signing account name
@@ -22,14 +26,17 @@ on:
         type: string
         default: ''
       publish_release:
-        required: true
+        required: false
         type: string
+        default: 'false'
       release_commit:
-        required: true
+        required: false
         type: string
+        default: ''
       release_version:
-        required: true
+        required: false
         type: string
+        default: ''
     secrets:
       # Azure Client ID (App Registration) for Artifact Signing
       AZURE_CLIENT_ID:
