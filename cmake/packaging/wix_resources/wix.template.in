@@ -28,11 +28,6 @@
         <WixVariable Id="WixUILicenseRtf" Value="$(var.CPACK_WIX_LICENSE_RTF)"/>
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALL_ROOT"/>
 
-        <?ifdef CPACK_WIX_PRODUCT_ICON?>
-        <Property Id="ARPPRODUCTICON" Value="ProductIcon.ico" />
-        <Icon Id="ProductIcon.ico" SourceFile="$(var.CPACK_WIX_PRODUCT_ICON)"/>
-        <?endif?>
-
         <?ifdef CPACK_WIX_UI_BANNER?>
         <WixVariable Id="WixUIBannerBmp" Value="$(var.CPACK_WIX_UI_BANNER)"/>
         <?endif?>

@@ -14,6 +14,7 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "ARM64")
     list(APPEND SUNSHINE_COMPILE_OPTIONS -Wno-dll-attribute-on-redeclaration)  # Boost
     list(APPEND SUNSHINE_COMPILE_OPTIONS -Wno-unknown-warning-option)  # ViGEmClient
     list(APPEND SUNSHINE_COMPILE_OPTIONS -Wno-unused-variable)  # Boost
+    list(APPEND SUNSHINE_COMPILE_OPTIONS -Wno-pragma-clang-attribute)  # Boost with libc++
 
     # Qt's static qwindows plugin and MinGW's Windowsapp import library both provide the
     # UiaRaiseNotificationEvent import thunk on ARM64. Keep both required libraries while
